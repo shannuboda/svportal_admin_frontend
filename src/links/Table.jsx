@@ -6,7 +6,7 @@ import axios from "axios";
 const Table = () => {
   const[student_data,setStudentData] = useState()
   const getData = async ()=>{
-    const stu_Data = await axios.get('http://localhost:3000/db1/students')
+    const stu_Data = await axios.get('https://backend-project-1nk6.onrender.com/db1/students')
     setStudentData(stu_Data.data);
     console.log(student_data);
     

@@ -21,7 +21,7 @@ function Login() {
   const FormFinish = async() => {
     // console.log("Failed:",Fields );
     try {
-        const response = await axios.post('http://localhost:3000/admin_login',Fields)
+        const response = await axios.post('https://backend-project-1nk6.onrender.com/admin_login',Fields)
         console.log(response.data["Admin"]);
         localStorage.setItem('AdminData',JSON.stringify(response.data['Admin']))
         Navigate('/home')

@@ -5,7 +5,7 @@ import Header from './links/Header';
 import './links/HeaderStyling.css'
 import { Route, Routes } from 'react-router-dom';
 import Home from './links/Home';
-import Login from './links/login';
+import Login from './links/Login';
 import Table from './links/Table';
 
 const App = () => {

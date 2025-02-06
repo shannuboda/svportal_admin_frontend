@@ -7,6 +7,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './links/Home';
 import Login from './links/Login';
 import Table from './links/Table';
+import Sem_Table from './links/Sem_Table';
 
 const App = () => {
   return (
@@ -16,6 +17,8 @@ const App = () => {
   <Route path='/' element={<Login></Login>}></Route>
   <Route path='/home' element={<Home></Home>}></Route>
   <Route path='/table' element={<Table></Table>}></Route>
+  <Route path='/sem_table/:id' element={<Sem_Table></Sem_Table>}></Route>
+
 
 
  </Routes>

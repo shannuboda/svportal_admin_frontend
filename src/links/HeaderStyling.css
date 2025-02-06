@@ -153,3 +153,24 @@
     background: #0f1c40;
   }
   
+
+
+  /* SEM TABLE STYLING */
+  @media screen and (max-width:768px) {
+    .semtable{
+      overflow: scroll !important;
+    }
+  }
+ 
+  @media print {
+    .student_details{
+      max-width: 900px !important;
+      
+      margin: auto !important;
+    }
+    .semtable{
+      max-width: 900px !important;
+      margin: auto !important;
+    }
+  }
+ 

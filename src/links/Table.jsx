@@ -4,19 +4,21 @@ import "./TableStyle.css";
 import Header from "./Header";
 import axios from "axios";
 const Table = () => {
-  const[student_data,setStudentData] = useState()
-  const getData = async ()=>{
-    const stu_Data = await axios.get('https://backend-project-1nk6.onrender.com/db1/students')
+  const [student_data, setStudentData] = useState();
+  const getData = async () => {
+    const stu_Data = await axios.get(
+      "https://backend-project-1nk6.onrender.com/db1/students"
+    );
     setStudentData(stu_Data.data);
     console.log(student_data);
-    
-  }
-  useEffect(()=>{
-    getData()
-  },[])
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <div className="marksheet-table-container">
       <Header></Header>
+   
       <div className="container">
         <div className="welcome-section">
           <h1>Welcome to the Marksheets Page</h1>
@@ -41,50 +43,47 @@ const Table = () => {
               </tr>
             </thead>
             <tbody>
-              {
-                student_data && student_data.map((val,index)=>(
+              {student_data &&
+                student_data.map((val, index) => (
                   <tr>
-                  <td>{val.username}</td>
-                  <td>{val.name}</td>
-                  <td>{val.regulation}</td>
-                  <td>{val.branch}</td>
-                  <td>{val.year}</td>
-  
-                  <td>
-                    <div class="button-container">
-                      <a
-                        href="data/login_student_data_view.php?id=19KH1A0512"
-                        class="view-button"
-                      >
-                        View
-                      </a>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="button-container">
-                      <a
-                        href="data/login_student_data_edit.php?id=19KH1A0512"
-                        class="edit-button"
-                      >
-                        Edit
-                      </a>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="button-container">
-                      <a
-                        href="data/login_student_data_delete.php?id=19KH1A0512"
-                        class="delete-button"
-                      >
-                        Delete
-                      </a>
-                    </div>
-                  </td>
-                </tr>
-                ))
-              }
-             
+                    <td>{val.username}</td>
+                    <td>{val.name}</td>
+                    <td>{val.regulation}</td>
+                    <td>{val.branch}</td>
+                    <td>{val.year}</td>
 
+                    <td>
+                      <div class="button-container">
+                        <a
+                          href="data/login_student_data_view.php?id=19KH1A0512"
+                          class="view-button"
+                        >
+                          View
+                        </a>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="button-container">
+                        <a
+                          href="data/login_student_data_edit.php?id=19KH1A0512"
+                          class="edit-button"
+                        >
+                          Edit
+                        </a>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="button-container">
+                        <a
+                          href="data/login_student_data_delete.php?id=19KH1A0512"
+                          class="delete-button"
+                        >
+                          Delete
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>{" "}
         </div>

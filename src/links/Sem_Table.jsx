@@ -12,7 +12,7 @@ const Sem_Table = () => {
   const [STUDENTDATA,SetStudentData] = useState()
 
   const getData = async ()=>{
-    const response = await axios.get(`http://localhost:3000/get_all_student_data/${Location.rollnumber}/${Location.year}/${Location.branch}/${Location.regulation}`)
+    const response = await axios.get(`https://backend-project-1nk6.onrender.com/get_all_student_data/${Location.rollnumber}/${Location.year}/${Location.branch}/${Location.regulation}`)
     SetAllSemData(response.data.SEM_DATA)
     SetStudentData(response.data.studentData)
   }

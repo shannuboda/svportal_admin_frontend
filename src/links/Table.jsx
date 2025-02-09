@@ -3,8 +3,10 @@ import DataTable from "react-data-table-component";
 import "./TableStyle.css";
 import Header from "./Header";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const Table = () => {
   const [student_data, setStudentData] = useState();
+  const navigate = useNavigate()
   const getData = async () => {
     const stu_Data = await axios.get(
       "https://backend-project-1nk6.onrender.com/db1/students"
@@ -37,7 +39,7 @@ const Table = () => {
                 <th onclick="sortTable(2)">Regulation</th>
                 <th onclick="sortTable(3)">Branch</th>
                 <th onclick="sortTable(3)">Academic Year</th>
-                <th>View</th>
+                <th >View</th>
                 <th>Edit</th>
                 <th>Delete</th>
               </tr>
@@ -45,7 +47,7 @@ const Table = () => {
             <tbody>
               {student_data &&
                 student_data.map((val, index) => (
-                  <tr>
+                  <tr key={index}>
                     <td>{val.username}</td>
                     <td>{val.name}</td>
                     <td>{val.regulation}</td>
@@ -53,17 +55,14 @@ const Table = () => {
                     <td>{val.year}</td>
 
                     <td>
-                      <div class="button-container">
-                        <a
-                          href="data/login_student_data_view.php?id=19KH1A0512"
-                          class="view-button"
-                        >
+                      <div class="button-container view-button" onClick={()=>navigate(`/sem_table/${val.username}/${val.year}/${val.branch}/${val.regulation}`)}>
+                       
                           View
-                        </a>
+                       
                       </div>
                     </td>
                     <td>
-                      <div class="button-container">
+                      <div class="button-container b">
                         <a
                           href="data/login_student_data_edit.php?id=19KH1A0512"
                           class="edit-button"
@@ -73,7 +72,7 @@ const Table = () => {
                       </div>
                     </td>
                     <td>
-                      <div class="button-container">
+                      <div class="button-container c">
                         <a
                           href="data/login_student_data_delete.php?id=19KH1A0512"
                           class="delete-button"

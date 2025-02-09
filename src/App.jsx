@@ -17,7 +17,7 @@ const App = () => {
   <Route path='/' element={<Login></Login>}></Route>
   <Route path='/home' element={<Home></Home>}></Route>
   <Route path='/table' element={<Table></Table>}></Route>
-  <Route path='/sem_table/:id' element={<Sem_Table></Sem_Table>}></Route>
+  <Route path='/sem_table/:rollnumber/:year/:branch/:regulation' element={<Sem_Table></Sem_Table>}></Route>
 
 
 

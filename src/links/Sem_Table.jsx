@@ -1,6 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header"
+import { useEffect } from "react";
+import axios from "axios";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+
 const Sem_Table = () => {
+  const navigate = useNavigate()
+  const Location = useParams()
+  
+  const [AllSemData,SetAllSemData] = useState()
+  const [STUDENTDATA,SetStudentData] = useState()
+
+  const getData = async ()=>{
+    const response = await axios.get(`http://localhost:3000/get_all_student_data/${Location.rollnumber}/${Location.year}/${Location.branch}/${Location.regulation}`)
+    SetAllSemData(response.data.SEM_DATA)
+    SetStudentData(response.data.studentData)
+  }
+  useEffect(()=>{
+    getData()
+  },[])
+// console.log(AllSemData,STUDENTDATA);
+console.log("sjdjs",AllSemData);
+
   return (
     <>
     <Header></Header>
@@ -8,33 +29,41 @@ const Sem_Table = () => {
           <h1>SEMESTER WISE STUDENT PERFORMANCE DATA</h1>
           
         </div>
-        <div className="container student_details">
+        <div className="container student_details" style={{overflow: "auto"}}>
+
         <table class="table table-striped">
             <tr>
             <th> UserName </th>
             <th> Full Name</th>
-            <th> Password </th>
+            <th> Mobile </th>
             <th> Regulation </th>
             <th>section</th>
             <th>Gender</th>
             <th> Email </th>
+            <th> Photo </th>
+
             </tr>
 
             <tr>
-                <td>19KH1A0512</td>
-                <td>Shanmukha Subramani</td>
-                <td>shannu</td>
-                <td>R19</td>
-                <td>CSE-A</td>
-                <td>M</td>
-                <td> bsmani512@gmail.com </td>
+                <td>{STUDENTDATA && STUDENTDATA[0].rollnu}</td>
+                <td>{STUDENTDATA && STUDENTDATA[0].name}</td>
+                <td>{STUDENTDATA && STUDENTDATA[0].PhoneNumber}</td>
+                <td>{Location.regulation}</td>
+                <td>{STUDENTDATA && STUDENTDATA[0].Branch_section}</td>
+                <td>{STUDENTDATA && STUDENTDATA[0].gender}</td>
+                <td>{STUDENTDATA && STUDENTDATA[0].email}</td>
+
+                <td><img src={STUDENTDATA && STUDENTDATA[0].photo} alt="" srcset="" style={{height:'5rem'}}/></td>
             </tr>
         </table>
         </div>
     <div className="container semtable">
-      <hr />
-      <h2> YEAR/SEM: 2_1 </h2>
-      <h3> SGPA : 8 </h3>
+    <hr />
+      {
+       AllSemData && Object.keys(AllSemData).map((SEM,index)=>(
+          <>
+             <h2> YEAR/SEM: {SEM} </h2>
+      <h3> SGPA : {AllSemData[SEM][0].gpa} </h3>
 
       <table className="table table-striped">
         <thead>
@@ -46,75 +75,25 @@ const Sem_Table = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Mathematical Foundations of Computer Science</td>
-            <td>P</td>
-            <td>3</td>
-            <td>8</td>
-          </tr>
-          <tr>
-            <td>Digital Logic Design</td>
-            <td>P</td>
-            <td>3</td>
-            <td>7</td>
-          </tr>
-          <tr>
-            <td>Design Thinking</td>
-            <td>P</td>
-            <td>2</td>
-            <td>7</td>
-          </tr>
-          <tr>
-            <td>Database Management Systems</td>
-            <td>P</td>
-            <td>3</td>
-            <td>7</td>
-          </tr>
-          <tr>
-            <td>Object Oriented Programming Through Java</td>
-            <td>P</td>
-            <td>3</td>
-            <td>6</td>
-          </tr>
-          <tr>
-            <td>Python Programming</td>
-            <td>P</td>
-            <td>3</td>
-            <td>9</td>
-          </tr>
-          <tr>
-            <td>Universal Human Values</td>
-            <td>P</td>
-            <td>2</td>
-            <td>9</td>
-          </tr>
-          <tr>
-            <td>Database Management Systems Lab</td>
-            <td>P</td>
-            <td>1.5</td>
-            <td>10</td>
-          </tr>
-          <tr>
-            <td>Object Oriented Programming Through Java Lab</td>
-            <td>P</td>
-            <td>1.5</td>
-            <td>10</td>
-          </tr>
-          <tr>
-            <td>Python Programming Lab</td>
-            <td>P</td>
-            <td>1.5</td>
-            <td>10</td>
-          </tr>
-          {/* Empty Row with colspan to maintain structure */}
-          <tr>
-            <td colSpan="4"></td>
-          </tr>
-          <tr>
-            <td colSpan="4"></td>
-          </tr>
+          {
+            AllSemData[SEM][0]['subjects'].map((key,index)=>(
+              <tr>
+              <td>{key.name}</td>
+              <td>{key.status}</td>
+              <td>{key.credits}</td>
+              <td>{key.grade}</td>
+            </tr>
+            ))
+          }
+        
+    
         </tbody>
       </table>
+      <hr />
+          </>
+       ))
+      }
+   
     </div>
     
     </>
